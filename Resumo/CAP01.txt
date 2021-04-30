@@ -1,0 +1,30 @@
+Capítulo 01 - Começando com testes de unidade
+
+Nesse capítulo aprendemos:
+
+⦁	Todos desenvolvedores vão escrever um código que não funciona e geralmente só vamos descobrir isso quando esse código já esta em produção (com o cliente);
+
+⦁	Um dos motivos de um software ter tantos bugs é a falta de teste!
+
+⦁	Se um humao for testar o software (teste manual) vai demorar e ser custoso. Por isso devemos fazer teste automatizados, ou seja, a máquina vai testar nosso software.
+
+⦁	Em um teste temos 3 passos (cénarios):
+	1) Montar o cenário a ser testado;
+	2) Executar ação que queremos testar;
+	3) Verificar e comparar o resultado obtido com o esperado.
+
+⦁	Testes devem estar em uma pasta source separada, chamada de test;
+
+⦁	Devemos manter o mesmo padrão na organização dos pacotes, utilizar o mesmo que utilizamos nas classes de execução, pois isso facilita mapear qual classe de executação foi testada;
+
+⦁	Vamos utilizar em java o framework de teste Junit. A versão 4 que é que vamos usar encontra-se no pacote org.junit;
+
+⦁	Todo método de teste tem que receber a anotação @Test e seu nome deve passar a idéia do que estamos testando;
+
+⦁	O método assert recebe dois parâmetros, o primeiro é sempre o esperado, e o segundo é de fato o valor obtido. Manter essa ordem irá nos dar o feedback correto;
+
+⦁	Vantagem de teste automatizado além de ser menos custoso ele garante que uma mudança no software não quebrou a nossa aplicação. É comum desenvolvedor mexer em X e a funcionalidade Y parar de funcionar, com testes automatizados fica rápido descobrir se isso ocorreu. Em qualquer mudança no software basta rodas os testes;
+
+⦁	Adicionar o JUnit no projeto, caso não tenha. Em projeto web usa-se a dependencia do Maven (pom.xml), ja em projeto simples do java é: botão direito no projeto -> build path -> add libraries -> Escolher JUnit 4;
+
+⦁	Ao executar um Assert.assertEquals com valores do tipo Double, nos devemos adicionar um Delta, para corrigir as casas decimais.
