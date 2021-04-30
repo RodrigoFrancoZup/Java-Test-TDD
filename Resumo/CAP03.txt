@@ -1,0 +1,10 @@
+Capítulo 03 - Praticando o TDD - Test-Driven Development
+Nesse capítulo aprendemos:
+
+⦁	Que TDD é a prática de se fazer o Código de Teste antes do Teste de Produção;
+
+⦁	Em TDD o primeiro teste sempre vai falhar, pois ainda não temos a implementação;
+
+⦁	O primeiro Código a ser escrito após o teste tem que ser simples (Baby Steps), pois seu objetivo é apenas passar no teste. Conseguiu passar no teste? Se  sim, agora temos a segurança de poder refatorar a solução (o código), escrever um código melhor. Depois disso basta rodar o teste novamente, o código refatorado tem que continuar passando no teste, caso contrario algo de errado você fez;
+
+⦁	Não precisamos aplicar TDD a todo momento, por exemplo: as vezes já existe a funcionalidade e só queremos escrever os testes, ou as vzes a funcionalidade a ser criada é simples demais (mas cuidado para não achar que tudo é simples).
