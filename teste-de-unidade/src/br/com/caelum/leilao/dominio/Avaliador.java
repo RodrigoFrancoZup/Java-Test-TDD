@@ -15,6 +15,9 @@ public class Avaliador {
 	private Double media = 0.0;
 
 	public void avalia(Leilao leilao) {
+		if(leilao.getLances().size() == 0) {
+			throw new RuntimeException("Leilao tem que ter lance!");
+		}
 		for (Lance lance : leilao.getLances()) {
 			if (lance.getValor() > maiorDeTodos)
 				maiorDeTodos = lance.getValor();

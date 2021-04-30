@@ -1,0 +1,29 @@
+Capítulo 05 - Testando exceções
+Nesse capítulo aprendemos:
+
+⦁	O valor esperado pode ser uma Exception do Java e com JUnit nós podemos esperar essas Excpetions de duas formas:
+ 
+	1) Forma menos usada. Fazendo um Try Catch dentro do método de 	teste. Detro do bloco catch não precisamos colocar nada, pois cair 	dentro desse bloco é o esperado. Dentro do bloco try teremos o 	cenário de execução (código que vai executar) e depois o Assert.fail(), 	pois se o código continuar ali tem que falhar, pois o esperado era cair 	no catch.
+
+	2)Forma mais usada, disponível do JUnit 4 para frente:
+	
+	Usar na tag @Test o atributo: expected = NomeDaException.class. 
+	Por exemplo: @Test(expected=RuntimeException.class)
+
+⦁	Há uma biblioteca que ajuda escrever os testes de uma maneira mais fácil de entender (Melhora a legibilidade). Pois com assertEquals a ordem é (Valor esperado, Valor Obtido). Com a bibiloteca teriamos o comando: 
+	
+	assertThat(Valor Obtido, equalTo(Valor Esperado));
+		
+	A Biblioteca que faz isso é: Hamcrest.
+
+⦁	Adicionando a Hamcrest em nosso projeto:
+	1.	Baixar a biblioteca (JAR) em: https://code.google.com/archive/p/hamcrest/downloads
+	2.	Colocar o JAR dentro de nosso projeto;
+	3.	Adicionar o JAR ao Classpath do projeto (Clicar botão direito na biblioteca -> Build Path -> Add to Build Path;
+	4.	Esse JAR tem que ficar em cima da exportação do JUnit, para isso: Botao direito no projeto -> Build Path -> Configure Build Path -> Ir na aba Order and Export -> Selecionar Hamcrest e clicar no botão UP até ela ficar em cima do JUnit.
+	5.	Para usar nas classes de testes vamos ter que fazer os imports: alguns deles:
+		
+		import static org.hamcrest.MatcherAssert.assertThat;
+		import static org.hamcrest.Matchers.*;
+
+⦁	O hamcrest facilita (em questao de Legibilidade) os testes que envolvem List<>. Para saber mais consultar: https://code.google.com/archive/p/hamcrest/wikis/Tutorial.wiki

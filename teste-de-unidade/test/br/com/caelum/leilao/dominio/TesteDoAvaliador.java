@@ -39,7 +39,6 @@ public class TesteDoAvaliador {
 		Lance LanceAna = new Lance(ana, 3000);
 		leilao.propoe(LanceAna);
 
-		
 		// Executa a ação
 		leiloeiro.avalia(leilao);
 
@@ -127,27 +126,15 @@ public class TesteDoAvaliador {
 	}
 
 	@Test
-	public void testeLeilaoSemLance() {
-		// Montando o cenário
-		Leilao leilao = new Leilao("Leilao de Camaro apreendido");
-
-		// Executa
-		leiloeiro.avalia(leilao);
-
-		// Verifica
-		assertEquals(Collections.EMPTY_LIST, leiloeiro.getTresMaiores());
-	}
-
-	@Test
 	public void testeLeilaoComTresLancesComRetornoDosTresMaiores() {
 
 		// Montando o cenário
-		
+
 		/*
-		Criado agora pelo BUILDER:
-		
-		Leilao leilao = new Leilao("Leilao de Camaro apreendido");
-		*/
+		 * Criado agora pelo BUILDER:
+		 * 
+		 * Leilao leilao = new Leilao("Leilao de Camaro apreendido");
+		 */
 
 		Usuario maria = new Usuario("Maria");
 		Usuario pedro = new Usuario("Pedro");
@@ -157,24 +144,17 @@ public class TesteDoAvaliador {
 		Usuario isabela = new Usuario("isabela");
 
 		/*
-		Criado agora pelo BUILDER:
-		
-		leilao.propoe(new Lance(maria, 1000.00));
-		leilao.propoe(new Lance(claudio, 630.00));
-		leilao.propoe(new Lance(pedro, 900.00));
-		leilao.propoe(new Lance(isabela, 230.00));
-		leilao.propoe(new Lance(betania, 800.00));
-		leilao.propoe(new Lance(valdir, 700.00));
-		*/
-		
-		Leilao leilao = new CriadorDeLeilao().para("Leilao de Camaro apreendido")
-				.lance(maria, 1000.00)
-				.lance(claudio, 630.00)
-				.lance(pedro, 900.00)
-				.lance(isabela, 230.00)
-				.lance(betania, 800.00)
-				.lance(valdir, 700.00)
-				.constroi();
+		 * Criado agora pelo BUILDER:
+		 * 
+		 * leilao.propoe(new Lance(maria, 1000.00)); leilao.propoe(new Lance(claudio,
+		 * 630.00)); leilao.propoe(new Lance(pedro, 900.00)); leilao.propoe(new
+		 * Lance(isabela, 230.00)); leilao.propoe(new Lance(betania, 800.00));
+		 * leilao.propoe(new Lance(valdir, 700.00));
+		 */
+
+		Leilao leilao = new CriadorDeLeilao().para("Leilao de Camaro apreendido").lance(maria, 1000.00)
+				.lance(claudio, 630.00).lance(pedro, 900.00).lance(isabela, 230.00).lance(betania, 800.00)
+				.lance(valdir, 700.00).constroi();
 
 		// Executa
 		leiloeiro.avalia(leilao);
@@ -210,5 +190,15 @@ public class TesteDoAvaliador {
 		Assert.assertEquals(2, leiloeiro.getTresMaiores().size());
 		Assert.assertEquals(1000.00, leiloeiro.getTresMaiores().get(0).getValor(), 0.00001);
 		Assert.assertEquals(630.00, leiloeiro.getTresMaiores().get(1).getValor(), 0.00001);
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void testeLeilaoSemLanceException() {
+		// Motando Cenario
+		Leilao leilao = new CriadorDeLeilao().para("Leilao de Camaro apreendido").constroi();
+
+		// Executa
+		leiloeiro.avalia(leilao);
+
 	}
 }
