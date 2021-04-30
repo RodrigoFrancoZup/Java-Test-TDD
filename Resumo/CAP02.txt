@@ -1,0 +1,12 @@
+Capítulo 02 - Testando o que realmente é necessário
+Nesse capítulo aprendemos:
+
+⦁	Podemos fazer o import statico do Assert (import static org.junit.Assert.*), assim não precisamos mais chamar: Assert.assetEquals... basta por assertEquals...
+
+⦁	Quando o teste envolve lista, nós temos em quantidade de assert: N+1, onde N é o tamanho da lista. Pois devemos testar todos itens de uma lista, mais o tamanho da lista!
+
+⦁	Ao envolver a lista, devemos também testar a lista vazia e se a ordenação for importante devemos testar com valores ordenados em ordem crescente e decrescente e com valores randomicos!
+
+⦁	Lembra quando falei que talvez a alteração em X afeta a funcionalidade em Y sem que a gente percebesse? Eu disse que o teste automatizado ajuda nisso, pois é só rodar o teste e caso um teste que estava OK agora Falhe é porque ocorreu isso. O termo disso é Teste de Regressão.
+
+⦁	Para elaborar o teste automatizado, pense como você faria o teste manual, isso vai ajudar a criar o teste!
