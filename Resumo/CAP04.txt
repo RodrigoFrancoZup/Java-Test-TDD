@@ -1,0 +1,82 @@
+Capítulo 04 - Cuidando dos seus testes
+Nesse capítulo aprendemos:
+
+⦁	Que devemos escrever a classe de teste com qualidade, pois assim será mais fácil manter essa classe. Nossa classe de Teste é MUITO ACOPLADA ao código de produção, um mudança no código de produção pode acarretar MUITAS mudanças nas classes de testes, caso os testes estejam escritos sem qualidade;
+
+⦁	Que devemos eliminar a repetição de código. Por exemplo a criação do objeto Avaliador na classe TesteAvaliador ocorre em todo método @test, podiamos criar um atributo da classe do tipo Avaliador e criar um método privado que desse new em Avaliador. 
+	
+	Assim trocariamos o trecho: Avaliador leiloeiro = new Avaliador(), por: 
+	
+	criaAvaliador();
+	
+	Para isso funcionar criamos o método: 
+
+	private void criaAvaliador() { 
+		this.leiloeiro = new Avaliador();
+	 }
+
+	E criamos o atributo da classe Avaliador leiloeiro;
+
+⦁	No item anterior substituimos uma linha de código por outra, mas agora se o modo de criar o objeto do tipo Avaliador mudar, vamos mexer em apenas um lugar;
+
+⦁	Podemos melhorar ainda mais nosso código, usando a anotação @Before. Todo o conteúdo do método anotado com @Before é executado antes de cada teste, ou seja, se temos 10 testes, o método será executado 10 vezes.
+
+⦁	Usando o @Before agora para criar o objeto Avaliador leiloeiro:
+
+	1) Podemos apagar a linha criaAvaliador() de todos os testes;
+	2) Criar o método pubiclo setUp() e anotá-lo com @Before;
+	3) No corpo do método colocar: this.leiloeiro = new Avaliador();
+
+⦁	Temos a anotação @After, ou seja, uma ação é executada depois de cada teste. Aqui não vamos usar, mas é essencial quando após o teste temos que librar algum serviço, como acesso a banco de dados, socket, arquivo. É utilizado em testes de integração.
+
+⦁	Temos ainda as anotações @BeforeClass e @AfterClass, ou seja, são ações que sempre serão executadas antes e depois de rodar os testes, mas agora só serão executadas uma vez, pois o contexto é a classe.
+
+⦁	Que Data Builder é uma classe que tem como objetivo criar outros Objetos. Objetos que vamos utilizar repetidas vezes em nossos testes. Normalmente para criar esses objetos exige-se muitos requisitos, então criá-los na mão é trabalhoso.
+
+⦁	Exemplo de Data Builder para se criar a classe objeto do tipo Leilao:
+
+	1-Criar o pacote builder, dentro do src de teste;
+
+	2-No pacoote builder criar a classe: CriadorDeLeilao;
+
+	3-Criar na classe o atributo Leilao leilao, pois essa classe fará um 	leilao e retornará ele no fim;
+
+	4-Analisar como faziamos esse leilao na mão:
+	Leilao leilao = new Leilao("Leilao de Camaro apreendido"); 
+	leilao.propoe(new Lance(maria, 1000.00)); 
+	leilao.propoe(new Lance(claudio, 630.00));
+	Ou seja, criamos um leilao com titulo, depois colocavamos nele vários 	lances. Nossa classe builder vai ter que fazer isso.
+
+	5-Todo builder será finalizado com o método constroi() e retorná o 	objeto que ele se propõe a fazer;
+
+	6-A classe ficou assim:
+	public class CriadorDeLeilao { 
+
+	private Leilao leilao; 
+
+		public CriadorDeLeilao para(String nome) { 
+			this.leilao = new Leilao(nome); 
+			return this;
+	 	}
+
+		public CriadorDeLeilao lance(Usuario usuario, Double valor) { 
+			this.leilao.propoe(new Lance(usuario, valor); 
+			return this; 
+		} 
+
+		public Leilao constroi() { 
+			return leilao; 
+		} 
+	}
+
+	7) Substituir a criação de Leilao escrito na mão por:
+	Leilao leilao = new CriadorDeLeilao().para("Leilao de Camaro...") 
+	.lance(maria, 1000.00) 
+	.lance(claudio, 630.00) 
+	.lance(pedro, 900.00) 
+	.lance(isabela, 230.00) 
+	.lance(betania, 800.00) 
+	.lance(valdir, 700.00) 
+	.constroi();
+
+

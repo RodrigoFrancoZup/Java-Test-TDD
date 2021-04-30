@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Avaliador {
 
+
+
 	private double maiorDeTodos = Double.NEGATIVE_INFINITY;
 	private double menorDeTodos = Double.POSITIVE_INFINITY;
 	private List<Lance> maiores;
